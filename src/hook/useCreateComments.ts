@@ -1,4 +1,4 @@
-import { NavigateFunction } from "react-router-dom";
+import { ErrorResponse, NavigateFunction } from "react-router-dom";
 import { ICreateOrchidParams } from "../constants/data";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import {
@@ -14,8 +14,26 @@ import {
   addCommentStart,
   addCommentSuccess,
 } from "../redux/slice/orchidSlice";
-
+import { message } from "antd";
+interface UserData {
+  user: {
+    id: string;
+    username: string;
+    isAdmin: boolean;
+    email: string;
+    avatar: string;
+  };
+}
+interface commentData {
+  _id: string;
+  author_img: string;
+  author_name: string;
+  rating: string;
+  comment: string;
+  author: string;
+}
 export function useCreateComment() {
+  const userDataObject: UserData = JSON.parse(localStorage.getItem("user")!);
    const state = useAppSelector((state) => state.orchid)
   const dispatch  = useAppDispatch();
   const handleCreateComment = async (input: CommentToOrchidParam) => {
@@ -23,10 +41,20 @@ export function useCreateComment() {
     try {
       const newComment = await agent.Orchid.createNewComment(input);
       dispatch(addCommentSuccess(newComment));
+      message.success("Add new Comment SucCessfully")
     } catch (error) {
       dispatch(addCommentFailed());
+      const typedError = error as ErrorResponse;
+      const errorMessage = typedError?.data?.error?.message || "Unknown error";
+      message.error(errorMessage)
     }
   };
-  return  { state , handleCreateComment } ; 
+
+  const userHasCommented = (orchidComments: commentData[]) => {
+    // Check if the user has already commented on the orchid
+    return orchidComments.some((comment) => comment.author === userDataObject.user.id);
+  };
+
+  return  { state , handleCreateComment , userHasCommented} ; 
 }
 

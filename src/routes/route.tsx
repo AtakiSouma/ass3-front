@@ -12,6 +12,7 @@ import UpdateProfile from "../page/UpdateProfile";
 import Forbidden from "../page/forbidden";
 import UserManagementSlice from "../redux/slice/UserManagement'Slice.";
 import UserList from "../page/UserManagement";
+import ChangePassword from "../page/ChangePassword";
 
 const HomePage = lazy(() => import("../page/HomePage"));
 const ErrorPage = lazy(() => import("../page/404"));
@@ -57,7 +58,7 @@ export const router = createBrowserRouter([
             path="/dashboard"
             element={
               <Suspense fallback={<></>}>
-                <PrivateRoute inverted={false}>
+                <PrivateRoute inverted={false} requiredRoles={['customer']}>
                   <Dashboard />
                 </PrivateRoute>
               </Suspense>
@@ -66,9 +67,19 @@ export const router = createBrowserRouter([
           <Route
             path="/orchid"
             element={
+              <Suspense fallback={<></>} >
+                <PrivateRoute inverted={false} requiredRoles={['admin']}>
+                  <Orchid />
+                </PrivateRoute>
+              </Suspense>
+            }
+          />
+          <Route
+            path="/users/change-password"
+            element={
               <Suspense fallback={<></>}>
                 <PrivateRoute inverted={false}>
-                  <Orchid />
+                  <ChangePassword />
                 </PrivateRoute>
               </Suspense>
             }
@@ -77,7 +88,7 @@ export const router = createBrowserRouter([
             path="/orchid/detail/:slug"
             element={
               <Suspense fallback={<></>}>
-                <PrivateRoute inverted={false}>
+                <PrivateRoute inverted={false} requiredRoles={['customer']}>
                   <DetaiLOrchid />
                 </PrivateRoute>
               </Suspense>

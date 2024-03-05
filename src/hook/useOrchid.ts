@@ -3,6 +3,8 @@ import { PagingParam } from "../utils/agents";
 import { useEffect } from "react";
 import { fetchAllOrchidAsync } from "../redux/slice/orchidSlice";
 
+
+
 export default function useOrchid() {
     const {
        orchidLoaded,
@@ -13,7 +15,7 @@ export default function useOrchid() {
     } = useAppSelector((state) => state.orchid)
     const dispatch = useAppDispatch();
     const input : PagingParam = {
-        limit: 10, 
+        limit: 6, 
         page: currentPage,
         search:searchValue
     }

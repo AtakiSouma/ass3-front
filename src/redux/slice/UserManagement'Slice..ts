@@ -9,6 +9,9 @@ export interface UserList {
   avatar: string;
   phoneNumber: number;
   gender: true;
+  isBlocked: boolean;
+  status: boolean;
+  createdAt: string;
 }
 export interface MetaData {
   currentPage: number;
@@ -65,6 +68,20 @@ const CustomerSlice = createSlice({
   name: "customer",
   initialState,
   reducers: {
+    ToggleBlockUserStart: (state) => {
+      state.isFetching = true;
+      state.userLoaded = true;
+    },
+    ToggleBlockUserSuccess: (state) => {
+      state.isFetching = false;
+      state.userLoaded = false;
+
+    },
+    ToggleBlockUserFailed: (state) => {
+      state.isFetching = false;
+      state.userLoaded = false;
+
+    },
     setTotalCount: (state, action) => {
       state.totalCount = action.payload;
     },
@@ -103,6 +120,9 @@ export const {
 
   setSearchValue,
   setUserLoaded,
+  ToggleBlockUserFailed,
+  ToggleBlockUserStart,
+  ToggleBlockUserSuccess,
 } = CustomerSlice.actions;
 
 export default CustomerSlice.reducer;

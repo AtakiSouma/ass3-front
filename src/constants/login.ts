@@ -4,3 +4,10 @@ export const LoginError = {
     'User has been blocked': 'Tài khoản của bạn đã bị dừng hoạt động',
   };
   
+
+
+  export const ChangePasswordError = {
+    "Wrong current password" : "Wrong current password",
+    "Password not matching":"Password not matching",
+  
+  }

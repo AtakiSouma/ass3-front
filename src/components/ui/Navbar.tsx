@@ -38,12 +38,14 @@ const Navbar = () => {
       username: string;
       isAdmin: boolean;
       email: string;
+      avatar:string;
     };
   }
   const userDataObject: UserData = JSON.parse(localStorage.getItem("user")!);
   const email = userDataObject?.user?.email || "";
   const isAdmin = userDataObject?.user?.isAdmin || "";
   const username = userDataObject?.user?.username || "";
+  const avatar = userDataObject?.user?.avatar || "https://i.pinimg.com/736x/f1/87/dc/f187dc8dfb3b57344b0e94efc4c967b5.jpg";
 
   const [loading, setLoading] = useState(false);
 
@@ -66,16 +68,18 @@ const Navbar = () => {
     }
   };
   const items: MenuProps["items"] = [
+ 
     {
-      key: "1",
+      key: "2",
       icon: <UserOutlined></UserOutlined>,
       label: <Link to={`/update-profile`}>Account Management</Link>,
     },
     {
-      key: "2",
+      key: "3",
       icon: <LogoutOutlined></LogoutOutlined>,
       label: <div onClick={Logout}>Logout</div>,
     },
+   
   ];
 
   return (
@@ -97,7 +101,7 @@ const Navbar = () => {
         <div className="flex flex-row items-center gap-5">
           <Avatar
             size={40}
-            src="https://steamuserimages-a.akamaihd.net/ugc/790875768635897882/B21380C75A8C2F48F09B55F74A6AA7BEBF3910CD/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
+            src={avatar}
           />
           <div className="flex flex-col text-white">
             <span>{username}</span>

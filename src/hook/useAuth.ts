@@ -33,7 +33,7 @@ export function useAuth() {
         const errorResponse = error?.response?.data?.error?.message;
         if (errorResponse in LoginError) {
           const translatedError =
-            LoginError[errorResponse as keyof typeof LoginError];
+          LoginError[errorResponse as keyof typeof LoginError];
           dispatch(loginFailure(translatedError));
         } else {
           dispatch(loginFailure(errorResponse));

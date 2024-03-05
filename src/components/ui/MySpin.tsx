@@ -1,13 +1,27 @@
-import { Alert, Spin } from 'antd';
+import React from "react";
+import { Alert, Spin } from "antd";
 
-const MySpin = () => (
-  <Spin tip='Loading...'>
-    <Alert
-      message='Alert message title'
-      description='Further details about the context of this alert.'
-      type='info'
-    />
-  </Spin>
+// Define the styled container for your custom spin
+
+// Define the prop types for MySpin
+interface MySpinProps {
+  message: string;
+  description: string;
+  type: "success" | "info" | "warning" | "error";
+  tip?: string;
+}
+
+const MySpin: React.FC<MySpinProps> = ({
+  message,
+  description,
+  type,
+  tip = "Loading...",
+}) => (
+  <div className="flex justify-center items-center h-[70vh] z-50">
+    <Spin tip={tip} className="w-[1000px]">
+      <Alert message={message} description={description} type={type} />
+    </Spin>
+  </div>
 );
 
 export default MySpin;

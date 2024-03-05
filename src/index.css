@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.ant-list-item-meta{
+    width: 500px;
+}
+.ant-list-item-meta-content{
+    width: 500px;
+}

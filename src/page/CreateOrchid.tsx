@@ -218,7 +218,7 @@ const CreateOrchid = () => {
   console.log("inintvalue to FOrm", initialValues);
 
   return (
-    <div className="py-5 border-[2px] border-blue-900 flex flex-wrap flex-col items-center shadow-2xl rounded-2xl">
+    <div className=" mx-2 my-2 py-5 border-[0.5px] border-gray-200 flex flex-wrap flex-col items-center shadow-lg rounded-2xl">
       <Title level={2}>Create Orchid</Title>
       <Formik
         initialValues={initialValues}
@@ -228,26 +228,25 @@ const CreateOrchid = () => {
         <Form>
           <Space direction="vertical">
             <div className="flex xl:flex-row lg:flex-row flex-col gap-10">
-              <div className="flex flex-col ">
-                <div>
+              <div className="flex flex-col gap-2 ">
+                <div className="flex flex-col gap-2">
                   <Upload {...props}>
                     <Button icon={<UploadOutlined />}>Upload Images</Button>
                   </Upload>
-                  <div className="py-1 px-1 w-[500px] h-[300px] rounded-lg border-[3px] border-blue-900">
+                  <div className="py-1 px-1 w-[300px] h-[200px]  rounded-lg border-[1px] border-gray-200">
                     <img
-                      src= { fileUrl || "https://assetsio.reedpopcdn.com/Honkai-Star-Rail-Sparkle-materials%2C-kit%2C-and-Eidolons-cover.jpg?width=1200&height=1200&fit=bounds&quality=70&format=jpg&auto=webp"}
+                      src= { fileUrl || "https://vkist.gov.vn/vkist-media/21/7/10/noimage.jpg"}
                       className="w-[100%] h-[100%] object-cover"
                     />
                   </div>
                 </div>
-                <div>
+                <div className="flex flex-col gap-2">
                   <Upload {...propsV2}>
                     <Button icon={<UploadOutlined />}>Upload BackGround</Button>
                   </Upload>
-
-                  <div className="py-1 px-1 w-[500px] h-[300px] rounded-lg border-[3px] border-blue-900">
+                  <div className="py-1 px-1 w-[300px] h-[200px] rounded-lg border-[1px] border-gray-200">
                     <img
-                      src={fileUrlV2 || "https://assetsio.reedpopcdn.com/Honkai-Star-Rail-Sparkle-materials%2C-kit%2C-and-Eidolons-cover.jpg?width=1200&height=1200&fit=bounds&quality=70&format=jpg&auto=webp"}
+                      src={fileUrlV2 || "https://vkist.gov.vn/vkist-media/21/7/10/noimage.jpg"}
                       className="w-[100%] h-[100%] object-cover"
                     />
                   </div>

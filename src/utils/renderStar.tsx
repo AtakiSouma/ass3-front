@@ -6,8 +6,8 @@ const renderRating = (rating: number): JSX.Element => {
     const maxRating: number = 5; // Maximum rating, adjust as needed
   
     for (let i = 1; i <= maxRating; i++) {
-      const starColor = i <= rating ? 'yellow' : 'gray'; 
-      stars.push(<FaStar key={i} color={starColor} size={20} />);
+      const starColor = i <= rating ? '#ebb434' : 'gray'; 
+      stars.push(<FaStar key={i} color={starColor} size={18} />);
     }
 
     return (

@@ -18,12 +18,16 @@ export interface UserDetail {
     updateUser:User;
     isFetching:boolean;
     error:boolean;
+    displayError:string | null;
+
 }
 const initialState: UserDetail = {
     currentUser: {} as User,
     updateUser: {} as User,
     isFetching: false,
     error: false,
+    displayError:"",
+
   };
   const TraineeDetailSlice = createSlice({
     name: 'userDetail',
@@ -53,10 +57,30 @@ const initialState: UserDetail = {
         state.isFetching = false;
         state.error = true;
       },
-    },
+      ChangePasswordStart:(state) => {
+        state.isFetching = true;
+      },
+      ChangePasswordSuccess:(state, action:PayloadAction<User>) => {
+        state.isFetching = false;
+        state.currentUser = action.payload;
+        state.error = false;
+      },
+      ChangePasswordFailed:(state,  action: PayloadAction<string>) => {
+        state.isFetching = false;
+        state.error = true;
+        state.displayError = action.payload;
+      },
+
+        },
   });
   
-  export const { UserDetailsStart, UserDetailSuccess, UserDetailFailure, UpdateDetailStart, UpdateDetailSuccess, UpdateDetailFailure} =
+  export const { UserDetailsStart, UserDetailSuccess, UserDetailFailure, UpdateDetailStart, UpdateDetailSuccess, UpdateDetailFailure,
+    ChangePasswordFailed , 
+    ChangePasswordStart ,
+    ChangePasswordSuccess
+  
+
+  } =
     TraineeDetailSlice.actions;
   
   export default TraineeDetailSlice.reducer;

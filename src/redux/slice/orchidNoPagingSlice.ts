@@ -56,15 +56,13 @@ const OrchidSlice = createSlice({
     // without paging
     builder.addCase(fetchAllOrchidWithoutPagingAsync.pending, (state) => {
       state.status = "pending fetch all orchids without paging";
-     
     });
     builder.addCase(
       fetchAllOrchidWithoutPagingAsync.fulfilled,
       (state, action: PayloadAction<Orchid[]>) => {
         state.status = "fulfilled fetch all";
         state.OrchidData = action.payload;
-         state.orchidLoaded= true;
-       
+        state.orchidLoaded= true;
       }
     );
     builder.addCase(fetchAllOrchidWithoutPagingAsync.rejected, (state) => {

@@ -82,7 +82,6 @@ const MySider = () => {
   const getConditionalItems = (): MenuItem[] => {
     if (ISADMIN) {
       return [
-        getItem("Dashboard", "dashboard", <LuLayoutDashboard />),
         getItem("Orchid", "orchid", <BsFlower1 />),
         getItem("CreateOrchid", "create", <FaSquarePlus />),
         getItem("Comment", "comment", <FaComment />),
@@ -92,7 +91,6 @@ const MySider = () => {
     } else if (!ISADMIN) {
       return [
         getItem("Dashboard", "dashboard", <LuLayoutDashboard />),
-        getItem("Orchid", "orchid", <BsFlower1 />),
       ];
     } else {
       return [];

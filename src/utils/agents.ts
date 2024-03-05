@@ -39,22 +39,51 @@ export interface UserProfileParams {
 export interface UIDParams {
   uid: string;
 }
+export interface ChangePasswordParams {
+  uid: string;
+  new_password: string;
+  current_password: string;
+  confirm_password: string;
+}
+
+export interface UpdateORchidParams {
+  slug: string;
+  name: string;
+  background: string;
+  category: string;
+  image: string;
+  isNatural: boolean;
+  origin: string;
+  price: number;
+  rating: number;
+}
 const responseBody = (response: AxiosResponse) => response.data;
 const requests = {
   get: <T>(url: string, params?: T) =>
     apiJWT.get(url, { params }).then(responseBody),
+  putParam: <T>(url: string, params?: T) =>
+    apiJWT.put(url, { params }).then(responseBody),
   post: <T>(url: string, body: T) => apiJWT.post(url, body).then(responseBody),
   put: <T>(url: string, body: T) => apiJWT.put(url, body).then(responseBody),
+
   del: <T>(url: string, params?: T) =>
     apiJWT.delete(url, { params }).then(responseBody),
 };
 const User = {
+  ToggleBlockUser: (uid: string) => requests.putParam(`/api/user/block/${uid}`),
+  changePassword: (input: ChangePasswordParams) =>
+    requests.put("/api/user/change-password", {
+      uid: input.uid,
+      current_password: input.current_password,
+      new_password: input.new_password,
+      confirm_password: input.confirm_password,
+    }),
   getAllCustomer: (input: PagingParam) =>
-  requests.post("/api/user/all-customer", {
-    limit: input.limit,
-    page: input.page,
-    search: input.search,
-  }),
+    requests.post("/api/user/all-customer", {
+      limit: input.limit,
+      page: input.page,
+      search: input.search,
+    }),
   getOneUser: (input: UIDParams) =>
     requests.post("/api/user/get-one", {
       uid: input.uid,
@@ -70,9 +99,19 @@ const User = {
     }),
 };
 const Orchid = {
-  deleteOrchid: (slug:string) => requests.del("api/orchid",{
-    slug:slug
-  }),
+  updateOrchid: (input: UpdateORchidParams) =>
+    requests.put("/api/orchid", {
+      slug: input.slug,
+      name: input.name,
+      background: input.background,
+      category: input.category,
+      image: input.image,
+      isNatural: input.isNatural,
+      origin: input.origin,
+      price: input.price,
+      rating: input.rating,
+    }),
+  deleteOrchid: (slug: string) => requests.del(`api/orchid/${slug}`),
   createOrchid: (input: OrchidParamCreation) =>
     requests.post("/api/orchid/create", {
       name: input.name,

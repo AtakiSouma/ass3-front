@@ -5,30 +5,30 @@ import { fetchAllOrchidAsync } from "../redux/slice/orchidSlice";
 import { fetchAllUserAsync } from "../redux/slice/UserManagement'Slice.";
 
 export default function useCustomerList() {
-    const {
-      userLoaded,
-       pageCount,
-       currentPage,
-       searchValue,
-       userAdaptersByPage
-    } = useAppSelector((state) => state.customer)
-    const dispatch = useAppDispatch();
-    const input : PagingParam = {
-        limit: 10, 
-        page: currentPage,
-        search:searchValue
-    }
+  const {
+    userLoaded,
+    pageCount,
+    currentPage,
+    searchValue,
+    userAdaptersByPage,
+  } = useAppSelector((state) => state.customer);
+  const dispatch = useAppDispatch();
+  const input: PagingParam = {
+    limit: 10,
+    page: currentPage,
+    search: searchValue,
+  };
 
-    useEffect(() => {
-        if(!userLoaded){
-            dispatch(fetchAllUserAsync(input));
-        }
-    },[userLoaded , dispatch]);
-    return {
-        userLoaded , 
-        pageCount,
-        currentPage,
-        searchValue,
-       userAdaptersByPage
+  useEffect(() => {
+    if (!userLoaded) {
+      dispatch(fetchAllUserAsync(input));
     }
+  }, [userLoaded, dispatch]);
+  return {
+    userLoaded,
+    pageCount,
+    currentPage,
+    searchValue,
+    userAdaptersByPage,
+  };
 }
